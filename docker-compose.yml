@@ -3,11 +3,11 @@ services:
   pg:
     image: postgres
     environment:
-      POSTGRES_DB: shop
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
     ports:
-      - "5432:5433"
+      - "5433:5432"
 
   adminer:
     image: adminer
