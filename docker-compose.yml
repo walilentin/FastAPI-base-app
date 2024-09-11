@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
-      - "5433:5433"
+      - "5432:5433"
 
   adminer:
     image: adminer
