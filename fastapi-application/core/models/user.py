@@ -8,4 +8,7 @@ from ..mixins.id_int_pm import IdIntMixin
 
 
 class User(Base, IdIntMixin, SQLAlchemyBaseUserTable[int]):
-    pass
+
+    @classmethod
+    def get_db(cls, session: "AsyncSession"):
+        return SQLAlchemyBaseUserTable(session, User)
