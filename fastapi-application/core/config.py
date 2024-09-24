@@ -10,7 +10,7 @@ class RunConfig(BaseModel):
 
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
-    users: str = "/users"
+    auth: str = "/auth"
 
 
 class ApiPrefix(BaseModel):
@@ -30,22 +30,28 @@ class DataBaseSettings(BaseSettings):
         "uq": "uq_%(table_name)s_%(column_0_name)s",
         "ck": "ck_%(table_name)s_%(constraint_name)s",
         "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-        "pk": "pk_%(table_name)s"
+        "pk": "pk_%(table_name)s",
     }
+
 
 class AccessToken(BaseModel):
     lifetime_seconds: int = 3600
+    reset_password_token_secret: str
+    verification_token_secret: str
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template", ".env"),
         case_sensitive=False,
         env_nested_delimiter="__",
-        env_prefix="FASTAPI__",
+        env_prefix="APP_CONFIG__",
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    db: DataBaseSettings
-    access_token: AccessToken = AccessToken()
+    access_token: AccessToken = AccessToken
+    db: DataBaseSettings = DataBaseSettings
+
+
 settings = Settings()
 print(settings.db.url)
