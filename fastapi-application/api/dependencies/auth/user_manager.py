@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import Depends
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 
-from api.dependencies.users import get_user_db
+from api.dependencies.auth.users import get_user_db
 from core.auth.user_manager import UserManager
 
 
