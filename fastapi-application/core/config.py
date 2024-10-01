@@ -11,11 +11,20 @@ class RunConfig(BaseModel):
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     auth: str = "/auth"
+    users: str = "/users"
 
 
 class ApiPrefix(BaseModel):
     prefix: str = "/api"
     v1: ApiV1Prefix = ApiV1Prefix()
+
+    @property
+    def bearer_token_url(self) -> str:
+        # api/v1/auth/login
+        parts = (self.prefix, self.v1.prefix, self.v1.auth, "/login")
+        path = "".join(parts)
+        # return path[1:]
+        return path.removeprefix("/")
 
 
 class DataBaseSettings(BaseSettings):
@@ -49,8 +58,8 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    access_token: AccessToken = AccessToken
-    db: DataBaseSettings = DataBaseSettings
+    access_token: AccessToken
+    db: DataBaseSettings
 
 
 settings = Settings()
