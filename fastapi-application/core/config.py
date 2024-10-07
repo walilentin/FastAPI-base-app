@@ -12,6 +12,7 @@ class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     auth: str = "/auth"
     users: str = "/users"
+    message: str = "/message"
 
 
 class ApiPrefix(BaseModel):
@@ -49,6 +50,13 @@ class AccessToken(BaseModel):
     verification_token_secret: str
 
 
+class RabbitMQ(BaseModel):
+    rmq_host: str
+    rmq_port: int
+    rmq_user: str
+    rmq_pass: str
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=(".env.template", ".env"),
@@ -60,6 +68,7 @@ class Settings(BaseSettings):
     api: ApiPrefix = ApiPrefix()
     access_token: AccessToken
     db: DataBaseSettings
+    rmq: RabbitMQ
 
 
 settings = Settings()
