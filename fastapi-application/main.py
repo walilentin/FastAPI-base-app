@@ -7,6 +7,7 @@ from fastapi.responses import ORJSONResponse
 from api import router as api_router
 from core.config import settings
 from core.models.db_helper import db_helper
+from rmq import router as rqm_router
 
 
 @asynccontextmanager
@@ -25,7 +26,9 @@ main_app = FastAPI(
 main_app.include_router(
     api_router,
 )
-
+main_app.include_router(
+    rqm_router,
+)
 if __name__ == "__main__":
     uvicorn.run(
         "main:main_app", host=settings.run.host, port=settings.run.port, reload=True
