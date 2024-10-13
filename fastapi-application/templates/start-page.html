@@ -1,0 +1,111 @@
+<html><head><base href="http://localhost:8000/api/v1/pages/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetAPI - Your FastAPI Pet Project</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f8ff;
+  }
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+  }
+  .container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .pet-icon {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+  }
+  .cta-button {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .cta-button:hover {
+    background-color: #2980b9;
+  }
+  .feature-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .feature-list li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+  }
+  .feature-list li::before {
+    content: '🐾';
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <svg class="pet-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" fill="#3498db"/>
+      <circle cx="30" cy="40" r="8" fill="white"/>
+      <circle cx="70" cy="40" r="8" fill="white"/>
+      <path d="M 30 70 Q 50 80 70 70" stroke="white" stroke-width="4" fill="none"/>
+    </svg>
+    <h1>Welcome to PetAPI</h1>
+    <p>Ready to build your FastAPI pet project? You've come to the right place! PetAPI is your starting point for creating powerful, efficient, and scalable web applications using FastAPI.</p>
+    <h2>Why Choose PetAPI?</h2>
+    <ul class="feature-list">
+      <li>Lightning-fast performance with async support</li>
+      <li>Automatic API documentation with Swagger UI</li>
+      <li>Built-in data validation using Pydantic</li>
+      <li>Easy to learn and implement</li>
+      <li>Perfect for both small projects and large-scale applications</li>
+    </ul>
+    <p>Whether you're building a simple CRUD application or a complex microservice, PetAPI has got you covered. Let's start your FastAPI journey today!</p>
+    <p style="text-align: center;">
+      <a href="/docs" class="cta-button">Explore API Docs</a>
+    </p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const petIcon = document.querySelector('.pet-icon');
+      
+      petIcon.addEventListener('mouseover', () => {
+        petIcon.style.transform = 'scale(1.1)';
+        petIcon.style.transition = 'transform 0.3s ease';
+      });
+      
+      petIcon.addEventListener('mouseout', () => {
+        petIcon.style.transform = 'scale(1)';
+      });
+      
+      const features = document.querySelectorAll('.feature-list li');
+      features.forEach((feature, index) => {
+        feature.style.opacity = '0';
+        feature.style.transform = 'translateY(20px)';
+        feature.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        setTimeout(() => {
+          feature.style.opacity = '1';
+          feature.style.transform = 'translateY(0)';
+        }, 300 * (index + 1));
+      });
+    });
+  </script>
+</body>
+</html>

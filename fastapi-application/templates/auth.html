@@ -1,0 +1,93 @@
+<html><head><base href="https://websim.auth/"><title>WebSim Auth</title><style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.auth-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 396px;
+}
+h1 {
+    text-align: center;
+    color: #1877f2;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    margin: 6px 0;
+    padding: 14px 16px;
+    font-size: 17px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+}
+button {
+    background-color: #1877f2;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 16px 0;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #166fe5;
+}
+.divider {
+    align-items: center;
+    border-bottom: 1px solid #dadde1;
+    display: flex;
+    margin: 20px 16px;
+    text-align: center;
+}
+.create-account {
+    text-align: center;
+}
+.create-account a {
+    color: #1877f2;
+    font-weight: bold;
+    text-decoration: none;
+}
+</style></head><body>
+<div class="auth-container">
+    <h1>WebSim Auth</h1>
+    <form id="authForm">
+        <input type="text" id="username" placeholder="Email or phone number" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Log In</button>
+    </form>
+    <div class="divider"></div>
+    <div class="create-account">
+        <a href="https://websim.auth/register">Create New Account</a>
+    </div>
+</div>
+
+<script>
+document.getElementById('authForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Simulating authentication process
+    setTimeout(() => {
+        if (username === 'user@example.com' && password === 'password123') {
+            alert('Login successful!');
+            window.location.href = 'https://websim.auth/dashboard';
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    }, 1000);
+});
+</script>
+</body></html>

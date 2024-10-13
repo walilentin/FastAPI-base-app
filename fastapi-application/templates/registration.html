@@ -1,0 +1,102 @@
+<html><head><base href="https://websim.io/register/"><title>WebSim Registration</title><style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 300px;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #45a049;
+}
+.error {
+    color: #f44336;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+</style></head><body>
+<div class="container">
+    <h1>Join WebSim</h1>
+    <form id="register-form">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="https://websim.io/login">Log in</a></p>
+</div>
+
+<script>
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    // Clear previous error messages
+    document.querySelectorAll('.error').forEach(el => el.remove());
+
+    let isValid = true;
+
+    if (password !== confirmPassword) {
+        isValid = false;
+        const errorElement = document.createElement('div');
+        errorElement.className = 'error';
+        errorElement.textContent = 'Passwords do not match';
+        document.getElementById('confirm-password').insertAdjacentElement('afterend', errorElement);
+    }
+
+    if (password.length < 8) {
+        isValid = false;
+        const errorElement = document.createElement('div');
+        errorElement.className = 'error';
+        errorElement.textContent = 'Password must be at least 8 characters long';
+        document.getElementById('password').insertAdjacentElement('afterend', errorElement);
+    }
+
+    if (isValid) {
+        // Simulate API call
+        setTimeout(() => {
+            alert('Registration successful! Welcome to WebSim, ' + username + '!');
+            window.location.href = 'https://websim.io/dashboard';
+        }, 1000);
+    }
+});
+</script>
+</body></html>
