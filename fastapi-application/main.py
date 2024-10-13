@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+from starlette.responses import RedirectResponse
 
 from api import router as api_router
 from core.config import settings
@@ -22,6 +23,13 @@ main_app = FastAPI(
     default_response_class=ORJSONResponse,
     lifespan=lifespan,
 )
+
+
+@main_app.get("/")
+async def redirect_to_auth():
+    return RedirectResponse(url="/api/v1/pages")
+
+
 main_app.include_router(
     api_router,
 )
