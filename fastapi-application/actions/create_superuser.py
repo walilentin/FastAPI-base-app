@@ -18,8 +18,8 @@ get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
-default_email = getenv("DEFAULT_EMAIL")
-default_password = getenv("DEFAULT_PASSWORD")
+default_email = getenv("DEFAULT_EMAIL", "grebenukvalentin@icloud.com")
+default_password = getenv("DEFAULT_PASSWORD", "LhLgn49M27")
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True
