@@ -1,5 +1,4 @@
 services:
-
   pg:
     image: postgres
     environment:
@@ -34,6 +33,16 @@ services:
       RABBITMQ_DEFAULT_PASS: "guest"
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - fastapi-application/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pg
 
 volumes:
   rabbitmq-data:
