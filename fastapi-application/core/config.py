@@ -99,8 +99,6 @@ class Settings(BaseSettings):
     logging: LoggingConfig = LoggingConfig()
 
 
-templates = Jinja2Templates(
-    directory="/home/valentyn/PycharmProjects/FastAPI-project/fastapi-application/templates"
-)
 settings = Settings()
 print(settings.db.url)
+templates = Jinja2Templates(directory="fastapi-application/templates")
