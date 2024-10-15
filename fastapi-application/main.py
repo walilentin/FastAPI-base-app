@@ -12,7 +12,7 @@ from core.models.db_helper import db_helper
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # startup
+
     yield
     # shutdown
     print("Dispose engine")
@@ -24,15 +24,16 @@ main_app = FastAPI(
     lifespan=lifespan,
 )
 
+main_app.include_router(
+    api_router,
+)
+
 
 @main_app.get("/")
 async def redirect_to_auth():
     return RedirectResponse(url="/api/v1/pages")
 
 
-main_app.include_router(
-    api_router,
-)
 if __name__ == "__main__":
     uvicorn.run(
         "main:main_app", host=settings.run.host, port=settings.run.port, reload=True
