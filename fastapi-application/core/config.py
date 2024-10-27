@@ -1,6 +1,13 @@
+from typing import Literal
+
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import PostgresDsn
+from starlette.templating import Jinja2Templates
+
+LOG_DEFAULT_FORMAT = (
+    "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
+)
 
 
 class RunConfig(BaseModel):
@@ -8,11 +15,19 @@ class RunConfig(BaseModel):
     port: int = 8000
 
 
+class GunicornConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
+    workers: int = 1
+    timeout: int = 900
+
+
 class ApiV1Prefix(BaseModel):
     prefix: str = "/v1"
     auth: str = "/auth"
     users: str = "/users"
     message: str = "/message"
+    pages: str = "/pages"
 
 
 class ApiPrefix(BaseModel):
@@ -26,6 +41,17 @@ class ApiPrefix(BaseModel):
         path = "".join(parts)
         # return path[1:]
         return path.removeprefix("/")
+
+
+class LoggingConfig(BaseModel):
+    log_level: Literal[
+        "debug",
+        "info",
+        "warning",
+        "error",
+        "critical",
+    ] = "info"
+    log_format: str = LOG_DEFAULT_FORMAT
 
 
 class DataBaseSettings(BaseSettings):
@@ -69,7 +95,10 @@ class Settings(BaseSettings):
     access_token: AccessToken
     db: DataBaseSettings
     rmq: RabbitMQ
+    gunicorn: GunicornConfig = GunicornConfig()
+    logging: LoggingConfig = LoggingConfig()
 
 
 settings = Settings()
 print(settings.db.url)
+templates = Jinja2Templates(directory="fastapi-application/templates")
