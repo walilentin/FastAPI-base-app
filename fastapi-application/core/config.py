@@ -3,7 +3,7 @@ from typing import Literal
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import PostgresDsn
-from starlette.templating import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 
 LOG_DEFAULT_FORMAT = (
     "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
@@ -101,4 +101,4 @@ class Settings(BaseSettings):
 
 settings = Settings()
 print(settings.db.url)
-templates = Jinja2Templates(directory="fastapi-application/templates")
+templates = Jinja2Templates(directory="templates")
