@@ -4,6 +4,7 @@ from os import getenv
 
 from api.dependencies.auth import get_users_db, get_user_manager
 from core.auth.user_manager import UserManager
+from core.config import Settings
 from core.models import (
     db_helper,
     User,
@@ -18,8 +19,8 @@ get_users_db_context = contextlib.asynccontextmanager(get_users_db)
 get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 
 
-default_email = getenv("DEFAULT_EMAIL", "grebenukvalentin@icloud.com")
-default_password = getenv("DEFAULT_PASSWORD", "LhLgn49M27")
+default_email = Settings.default_email
+default_password = Settings.default_password
 default_is_active = True
 default_is_superuser = True
 default_is_verified = True

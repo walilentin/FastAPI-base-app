@@ -90,6 +90,8 @@ class Settings(BaseSettings):
         env_nested_delimiter="__",
         env_prefix="APP_CONFIG__",
     )
+    default_email: str
+    default_password: str
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     access_token: AccessToken
